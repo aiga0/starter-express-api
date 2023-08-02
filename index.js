@@ -12,6 +12,7 @@ const config = {
 app.get('/', async (req,res) =>{
 
     const rqq = req.query;
+    if (!rqq.url) return res.status(404).end('Welcome to hero-images.weserv','utf8')
 
     // if url blank or not match regex url
     if (!rqq.url || !rqq.url.startsWith('http')) return res.status(404).end('Something Went Error','utf8')
