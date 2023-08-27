@@ -8,8 +8,7 @@ const config = {
     ip: '127.0.0.1',
     port: 8082
 }
-
-app.get('/', async (req,res) =>{
+const handler = async (req,res) => {
 
     const rqq = req.query;
     if (!rqq.url) return res.status(404).end('Welcome to hero-images.weserv','utf8')
@@ -30,6 +29,9 @@ app.get('/', async (req,res) =>{
     
     res.setHeader('Content-Type',responseContentType)
     return res.end(new Uint8Array(await imgRes.arrayBuffer()));
-})
+}
+
+app.get('/', handler)
+app.get('/r', handler)
 
 app.listen(process.env.PORT ?? config.port,()=> console.log(`\nthis is hero to images.weserv.nl,\nlistening on ${config.ip+':'+config.port}\n`))
